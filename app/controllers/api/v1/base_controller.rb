@@ -1,6 +1,6 @@
 module Api
   module V1
-    class BaseController < ::ApplicationController
+    class BaseController < ActionController::API
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
       private
