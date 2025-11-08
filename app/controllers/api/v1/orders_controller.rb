@@ -6,7 +6,7 @@ module Api
       # GET /api/v1/orders
       def index
         @orders = Order.includes(:customer, :employee, :products).all
-        render json: @orders.to_json(include: [ :customer, :products ])
+        render json: @orders.to_json(include: [ :customer, :employee ])
       end
 
       # GET /api/v1/orders/:id
@@ -19,7 +19,7 @@ module Api
         @order = Order.new(order_params)
 
         if @order.save
-          render json: @order.to_json(include: :order_details), status: :created
+          render json: @order.to_json(include: [ :customer, :employee ]), status: :created
         else
           render json: @order.errors, status: :unprocessable_entity
         end
@@ -28,7 +28,7 @@ module Api
       # PATCH/PUT /api/v1/orders/:id
       def update
         if @order.update(order_params)
-          render json: @order.to_json(include: :order_details)
+          render json: @order.to_json(include: [ :customer, :employee ])
         else
           render json: @order.errors, status: :unprocessable_entity
         end
@@ -53,7 +53,6 @@ module Api
           :order_date,
           :status,
           :total_amount,
-          # Дозволяємо вкладені атрибути для деталей замовлення
           order_details_attributes: [
             :product_id,
             :quantity,
