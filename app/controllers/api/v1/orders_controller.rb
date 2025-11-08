@@ -11,7 +11,7 @@ module Api
 
       # GET /api/v1/orders/:id
       def show
-        render json: @order.to_json(include: [ :customer, :employee, :order_details => { include: :product } ])
+        render json: @order.to_json(include: [ :customer, :employee, order_details: { include: :product } ])
       end
 
       # POST /api/v1/orders

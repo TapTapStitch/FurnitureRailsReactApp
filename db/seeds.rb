@@ -20,26 +20,26 @@ ActiveRecord::Base.transaction do
 
   employees = []
   5.times do
-    full_name_ua = if [true, false].sample
+    full_name_ua = if [ true, false ].sample
                      "#{FFaker::NameUA.last_name_female} #{FFaker::NameUA.first_name_female} #{FFaker::NameUA.middle_name_female}"
-                   else
+    else
                      "#{FFaker::NameUA.last_name_male} #{FFaker::NameUA.first_name_male} #{FFaker::NameUA.middle_name_male}"
-                   end
+    end
 
     employees << Employee.create(
       full_name: full_name_ua,
-      position: ["Консультант", "Менеджер", "Касир"].sample,
+      position: [ "Консультант", "Менеджер", "Касир" ].sample,
       phone: FFaker::PhoneNumberUA.mobile_phone_number
     )
   end
 
   customers = []
   30.times do
-    full_name_ua = if [true, false].sample
+    full_name_ua = if [ true, false ].sample
                      "#{FFaker::NameUA.last_name_female} #{FFaker::NameUA.first_name_female} #{FFaker::NameUA.middle_name_female}"
-                   else
+    else
                      "#{FFaker::NameUA.last_name_male} #{FFaker::NameUA.first_name_male} #{FFaker::NameUA.middle_name_male}"
-                   end
+    end
 
     customers << Customer.create(
       full_name: full_name_ua,
@@ -56,7 +56,7 @@ ActiveRecord::Base.transaction do
       description: FFaker::Lorem.sentence,
       price: rand(1000..25000.0).round(2),
       dimensions: "#{rand(50..200)}x#{rand(40..100)}x#{rand(50..100)}",
-      material: ["Дуб", "Сосна", "ДСП", "Метал", "Скло", "Пластик"].sample,
+      material: [ "Дуб", "Сосна", "ДСП", "Метал", "Скло", "Пластик" ].sample,
       category: categories.sample
     )
   end
@@ -66,7 +66,7 @@ ActiveRecord::Base.transaction do
       customer: customers.sample,
       employee: employees.sample,
       order_date: FFaker::Time.between(1.year.ago, Time.now),
-      status: ["виконано", "в обробці", "скасовано"].sample,
+      status: [ "виконано", "в обробці", "скасовано" ].sample,
       total_amount: 0
     )
 
